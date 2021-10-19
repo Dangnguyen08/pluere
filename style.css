@@ -1,180 +1,253 @@
-@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
-svg {
-  z-index: 100;
-}
-
 :root {
-  --padding: 10vmin;
-  --color-background: #D0CBC7;
-  --font-size-large: 8vw;
-  --font-size-medium: 4vw;
-  --font-size-normal: 2vw;
-}
-@media only screen and (min-width: 800px) {
-  :root {
-    --font-size-large: 64px;
-    --font-size-medium: 32px;
-    --font-size-normal: 16px;
-  }
-}
-@media only screen and (max-width: 500px) {
-  :root {
-    --font-size-large: 40px;
-    --font-size-medium: 20px;
-    --font-size-normal: 14px;
-  }
-}
-
-a {
-  color: white;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-li {
-  margin-top: 10px;
+  --main-bg-color: #d6b9a4;
+  --cup-color: #474747;
+  --cup-width: 30vw;
+  --cup-height: 24vw;
+  --cup-handle-width: 5vw;
+  --cup-handle-height: calc(2 * var(--cup-handle-width));
+  --cup-border-width: 2vw;
+  --cup-inside-width: calc(var(--cup-width) - var(--cup-border-width));
+  --cup-inside-height: calc(var(--cup-height) - var(--cup-border-width));
+  --border-width: 1vw;
+  --main-border: var(--border-width) solid var(--cup-color);
+  --plate-width: 25vw;
+  --plate-height: 2vw;
+  --coffee-bottom: 80%;
+  --water-bottom: 0;
+  --milk-bottom: 0;
+  --liquor-bottom: 0;
+  --whipped_cream-bottom: 0;
+  --steamed_milk-bottom: 0;
+  --milk_foam-bottom: 0;
+  --chocolate-bottom: 0;
+  --coffee-color: #3c302f;
+  --water-color: #b1dce2;
+  --milk-color: #f0ebe5;
+  --liquor-color: #fc8626;
+  --whipped_cream-color: #fceecb;
+  --milk_foam-color: #fceecb;
+  --steamed_milk-color: #ffd7b3;
+  --chocolate-color: #391e09;
 }
 
-html, body {
-  margin: 0;
-  min-height: 100%;
-  min-width: 100%;
-  font-family: "Libre Baskerville", serif;
-  background-color: var(--color-background);
-  font-weight: 400;
-  font-size: var(--font-size-normal);
-  overflow-x: hidden;
-}
-
-canvas {
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  pointer-events: none;
-  visibility: hidden;
-  opacity: 0;
-}
-
-.solid {
-  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-}
-
-.wireframe {
-  -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-          clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-}
-.content .trigger {
-  position: absolute;
-  top: 0;
-  height: 100%;
-}
-.content .section {
-  position: relative;
-  padding: var(--padding);
-  --pad2: calc(var(--padding) * 2);
-  width: calc(100vw - var(--pad2));
-  height: calc(100vh - var(--pad2));
-  margin: 0 auto;
-  z-index: 2;
-}
-.content .section.dark {
-  color: white;
-  background-color: black;
-}
-.content .section.right {
-  text-align: right;
-}
-.content .blueprint {
-  position: relative;
-  background-color: #131C2A;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-  background-attachment: fixed;
-}
-.content .blueprint svg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+body {
   height: 100vh;
-  stroke: white;
-  pointer-events: none;
-  visibility: hidden;
-}
-.content .blueprint .dark {
-  background-color: transparent;
-}
-.content .ground-container {
-  position: relative;
+  width: 100vw;
+  background: var(--main-bg-color);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: auto;
   overflow: hidden;
 }
-.content .ground-container .parallax {
+
+.social {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: -100px;
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-  transform-origin: top center;
+  top: 10px;
+  left: 10px;
 }
-.content .ground-container .ground {
-  z-index: -1;
-  background-image: url("https://assets.codepen.io/557388/background-reduced.jpg");
-}
-.content .ground-container .clouds {
-  z-index: 2;
-  background-image: url("https://assets.codepen.io/557388/clouds.png");
-}
-.content .scroll-cta, .content .credits {
-  position: absolute;
-  bottom: var(--padding);
-}
-.content .scroll-cta {
-  font-size: var(--font-size-medium);
-  opacity: 0;
-}
-.content .sunset {
-  background: url("https://assets.codepen.io/557388/sunset-reduced.jpg") no-repeat top center;
-  background-size: cover;
-  transform-origin: top center;
-}
-.content h1, .content h2 {
-  font-size: var(--font-size-large);
-  margin: 0vmin 0 2vmin 0;
-  font-weight: 700;
-  display: inline;
-}
-.content h3 {
-  font-size: var(--font-size-medium);
-  font-weight: 400;
-  margin: 0;
-}
-.content .end h2 {
-  margin-bottom: 50vh;
-}
-.content .loading {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
+
+.container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-medium);
+  width: 70vw;
+}
+
+.coffee_name {
+  color: #f1faee;
+  text-align: center;
+  /*   width: 100%; */
+  font-size: 4vw;
+}
+
+.options {
+  display: grid;
+  grid-gap: 1vh;
+  grid-template-rows: repeat(10, 35px);
+  grid-template-columns: 120px;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+}
+
+.options button {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: rgba(214, 217, 227, 0.6);
+  outline: none;
+  font-size: 1rem;
+  border: 2px solid #a67a60;
+  box-shadow: none;
+  color: #363636;
+  box-sizing: border-box;
+  border-radius: 1vh;
+}
+
+.options button:hover {
+  cursor: pointer;
+  border-width: 4px;
+  background: rgba(255, 255, 255, 0.6);
+}
+.options .selected {
+  border-width: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+}
+
+.cup {
+  width: var(--cup-width);
+  height: var(--cup-height);
+  border-radius: 0 0 10vw 10vw;
+  position: relative;
+  background-color: var(--cup-color);
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.cup::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: calc(100% - 1vw);
+  width: var(--cup-handle-width);
+  height: var(--cup-handle-height);
+  border: var(--main-border);
+  border-radius: 50% 30%;
+}
+
+.plate {
+  position: absolute;
+  top: calc(100% + 1vw);
+  left: calc((var(--cup-width) - var(--plate-width)) / 2);
+  width: var(--plate-width);
+  background: var(--cup-color);
+  height: var(--plate-height);
+  border-radius: 1vw;
+}
+
+.filling {
+  position: absolute;
+  left: calc(var(--cup-border-width) / 2);
+  bottom: calc(var(--cup-border-width) / 2);
+  width: var(--cup-inside-width);
+  height: var(--cup-inside-height);
+  overflow: hidden;
+  border-radius: 0 0 10vw 10vw;
+  background-color: var(--main-bg-color);
+  bottom: 1vw;
+}
+
+.filling div {
+  position: absolute;
+  width: 100%;
+  transition: all 1s linear;
+  color: #817f75;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 0;
+  overflow: hidden;
+  font-size: 3vw;
+  height: 100%;
+  bottom: -100%;
+  box-sizing: border-box;
+}
+
+.filling.reset.americano {
+  --water-bottom: 0;
+  --coffee-bottom: -60%;
+}
+.filling.reset.au_lait {
+  --coffee-bottom: -50%;
+  --milk-bottom: 0%;
+}
+.filling.reset.capuccino {
+  --coffee-bottom: -65%;
+  --steamed_milk-bottom: -35%;
+  --milk_foam-bottom: 0;
+}
+.filling.reset.espresso {
+  --coffee-bottom: -60%;
+}
+.filling.reset.latte {
+  --coffee-bottom: -60%;
+  --steamed_milk-bottom: -20%;
+  --milk_foam-bottom: 0%;
+}
+.filling.reset.corretto {
+  --coffee-bottom: -45%;
+  --liquor-bottom: -25%;
+}
+.filling.reset.lungo {
+  --water-bottom: 0;
+  --coffee-bottom: -50%;
+}
+.filling.reset.macchiato {
+  --coffee-bottom: -70%;
+  --milk_foam-bottom: 0;
+}
+.filling.reset.mocha {
+  --coffee-bottom: -60%;
+  --chocolate-bottom: -40%;
+  --steamed_milk-bottom: -20%;
+  --whipped_cream-bottom: 0%;
+}
+.filling.reset.ristretto {
+  --coffee-bottom: -80%;
+}
+
+div.chocolate {
+  background: var(--chocolate-color);
+  bottom: var(--chocolate-bottom);
+  z-index: 6;
+}
+div.coffee {
+  background: var(--coffee-color);
+  bottom: var(--coffee-bottom);
+  line-height: 4vw;
+  z-index: 7;
+}
+div.liquor {
+  background: var(--liquor-color);
+  bottom: var(--liquor-bottom);
+  z-index: 4;
+}
+div.milk {
+  background: var(--milk-color);
+  bottom: var(--milk-bottom);
+  z-index: 2;
+}
+div.milk_foam {
+  background: var(--milk_foam-color);
+  bottom: var(--milk_foam-bottom);
+  z-index: 5;
+}
+
+div.steamed_milk {
+  background: var(--steamed_milk-color);
+  bottom: var(--steamed_milk-bottom);
+  z-index: 6;
+}
+div.water {
+  background: var(--water-color);
+  bottom: var(--water-bottom);
+}
+div.whipped_cream {
+  background: var(--whipped_cream-color);
+  bottom: var(--whipped_cream-bottom);
+  z-index: 4;
+}
+
+.filling.reset {
+  --coffee-bottom: -100%;
+  --water-bottom: -100%;
+  --milk-bottom: -100%;
+  --liquor-bottom: -100%;
+  --whipped_cream-bottom: -100%;
+  --steamed_milk-bottom: -100%;
+  --milk_foam-bottom: -100%;
+  --chocolate-bottom: -100%;
 }
